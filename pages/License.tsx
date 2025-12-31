@@ -18,13 +18,19 @@ export const LicenseActivate: React.FC = () => {
   const [machineId, setMachineId] = useState('');
   const [status, setStatus] = useState<string>('IDLE');
   const [message, setMessage] = useState('');
+  const [activeData, setActiveData] = useState<any>(null);
 
   useEffect(() => {
     setMachineId(generateMachineId());
-    const savedToken = localStorage.getItem('of_activation_token');
+    const savedToken = localStorage.getItem('gl_license_data');
     if (savedToken) {
-      setStatus('SUCCESS');
-      setMessage('Active');
+      try {
+          const parsed = JSON.parse(savedToken);
+          setActiveData(parsed);
+          setStatus('SUCCESS');
+      } catch (e) {
+          localStorage.removeItem('gl_license_data');
+      }
     }
   }, []);
 
@@ -33,18 +39,45 @@ export const LicenseActivate: React.FC = () => {
     setStatus('LOADING');
     setMessage('');
     
-    await new Promise(resolve => setTimeout(resolve, 1500));
-    
-    // Simulate Check: OF- or AUTO-
-    if (licenseKey.startsWith("GL-") || licenseKey.startsWith("AUTO-")) {
-      localStorage.setItem('of_activation_token', 'mock_token_' + Date.now());
-      setStatus('SUCCESS');
-      setMessage('Active');
-    } else {
+    try {
+        const res = await fetch('/api/activate', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ licenseKey, machineId })
+        });
+        
+        const data = await res.json();
+        
+        if (res.ok) {
+            setStatus('SUCCESS');
+            setMessage('Activated successfully');
+            setActiveData({
+                product: data.product,
+                expires: data.expires_at,
+                key: licenseKey
+            });
+            localStorage.setItem('gl_license_data', JSON.stringify({
+                product: data.product,
+                expires: data.expires_at,
+                key: licenseKey
+            }));
+        } else {
+            setStatus('ERROR');
+            setMessage(data.error || 'Activation failed');
+        }
+    } catch (err) {
         setStatus('ERROR');
-        setMessage('Invalid License Key format. Must start with GL- or AUTO-');
+        setMessage('Network error. Please try again.');
     }
   };
+
+  const handleDeactivate = () => {
+      // In a real app, you might want an API call here to clear the machine_id in DB
+      localStorage.removeItem('gl_license_data');
+      setStatus('IDLE');
+      setLicenseKey('');
+      setActiveData(null);
+  }
 
   return (
     <div className="max-w-4xl mx-auto px-4 py-20">
@@ -65,7 +98,7 @@ export const LicenseActivate: React.FC = () => {
                     <span className="text-zinc-500 font-mono text-xs">{machineId}</span>
                 </div>
                 {status === 'SUCCESS' && (
-                     <Button variant="outline" size="sm" className="w-full mt-4" onClick={() => { localStorage.removeItem('of_activation_token'); setStatus('IDLE'); setLicenseKey(''); }}>
+                     <Button variant="outline" size="sm" className="w-full mt-4" onClick={handleDeactivate}>
                         Deactivate Machine
                      </Button>
                 )}
@@ -85,9 +118,9 @@ export const LicenseActivate: React.FC = () => {
                                     Your system is ready. Restart NinjaTrader 8 to load the indicators.
                                 </p>
                                 <div className="mt-6 p-4 bg-black border border-zinc-800 rounded font-mono text-sm text-zinc-300">
-                                    Product: GL Bundle (Lifetime)<br/>
-                                    Expires: Never<br/>
-                                    Seats: 1/2 Used
+                                    Product: {activeData?.product || 'Unknown'}<br/>
+                                    Key: {activeData?.key}<br/>
+                                    Expires: {activeData?.expires ? new Date(activeData.expires).toLocaleDateString() : 'Lifetime'}
                                 </div>
                             </div>
                         </div>
