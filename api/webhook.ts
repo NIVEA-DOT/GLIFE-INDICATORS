@@ -9,7 +9,7 @@ const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
 // Lemon Squeezy 설정 (Settings > Webhooks에서 생성한 Secret)
 const webhookSecret = process.env.LEMONSQUEEZY_WEBHOOK_SECRET;
 
-export default async function handler(req, res) {
+export default async function handler(req: any, res: any) {
   if (req.method !== 'POST') {
     return res.status(405).json({ message: 'Method not allowed' });
   }
