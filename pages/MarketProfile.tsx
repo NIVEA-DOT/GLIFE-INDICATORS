@@ -1,7 +1,14 @@
 import React from 'react';
 import { Button, GlassPanel, SectionHeader, Icons, Badge } from '../components/Shared';
 import { PricingSection } from '../components/PricingSection';
-import { CHECKOUT_URL_PROFILE } from '../constants';
+import { 
+    CHECKOUT_URL_PROFILE_MONTHLY,
+    CHECKOUT_URL_PROFILE_QUARTERLY,
+    CHECKOUT_URL_PROFILE_YEARLY,
+    PRICE_PROFILE_MONTHLY,
+    PRICE_PROFILE_QUARTERLY,
+    PRICE_PROFILE_YEARLY
+} from '../constants';
 
 const FeatureRow: React.FC<{ title: string; desc: string; icon: any }> = ({ title, desc, icon: Icon }) => (
     <div className="flex gap-6 items-start py-8 border-b border-zinc-900 last:border-0 group hover:bg-zinc-900/20 px-4 rounded transition-colors">
@@ -78,16 +85,18 @@ export const MarketProfile: React.FC = () => {
 
             {/* 3. PRICING */}
             <PricingSection 
-                title="Lifetime Access"
+                title="Select Plan"
                 options={[
-                    { period: 'lifetime', price: 49, checkoutUrl: CHECKOUT_URL_PROFILE },
+                    { period: 'monthly', price: PRICE_PROFILE_MONTHLY, checkoutUrl: CHECKOUT_URL_PROFILE_MONTHLY },
+                    { period: 'quarterly', price: PRICE_PROFILE_QUARTERLY, saveLabel: 'SAVE 10%', checkoutUrl: CHECKOUT_URL_PROFILE_QUARTERLY },
+                    { period: 'yearly', price: PRICE_PROFILE_YEARLY, saveLabel: 'SAVE 30%', checkoutUrl: CHECKOUT_URL_PROFILE_YEARLY }
                 ]}
                 features={[
                     "TPO Charting Module",
                     "Volume Profile",
                     "Composite Merging",
                     "Session Splitting",
-                    "Lifetime Updates"
+                    "Regular Updates"
                 ]}
             />
         </div>

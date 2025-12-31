@@ -1,7 +1,14 @@
 import React from 'react';
 import { Button, GlassPanel, SectionHeader, Icons, Badge } from '../components/Shared';
 import { PricingSection } from '../components/PricingSection';
-import { CHECKOUT_URL_MONEY_FLOW } from '../constants';
+import { 
+    CHECKOUT_URL_MF_MONTHLY,
+    CHECKOUT_URL_MF_QUARTERLY,
+    CHECKOUT_URL_MF_YEARLY,
+    PRICE_MF_MONTHLY,
+    PRICE_MF_QUARTERLY,
+    PRICE_MF_YEARLY
+} from '../constants';
 
 const FeatureRow: React.FC<{ title: string; desc: string; icon: any }> = ({ title, desc, icon: Icon }) => (
     <div className="flex gap-6 items-start py-8 border-b border-zinc-900 last:border-0 group hover:bg-zinc-900/20 px-4 rounded transition-colors">
@@ -75,15 +82,17 @@ export const MoneyFlow: React.FC = () => {
 
             {/* 3. PRICING */}
             <PricingSection 
-                title="Lifetime Access"
+                title="Get Started"
                 options={[
-                    { period: 'lifetime', price: 79, checkoutUrl: CHECKOUT_URL_MONEY_FLOW },
+                    { period: 'monthly', price: PRICE_MF_MONTHLY, checkoutUrl: CHECKOUT_URL_MF_MONTHLY },
+                    { period: 'quarterly', price: PRICE_MF_QUARTERLY, saveLabel: 'SAVE 15%', checkoutUrl: CHECKOUT_URL_MF_QUARTERLY },
+                    { period: 'yearly', price: PRICE_MF_YEARLY, saveLabel: 'SAVE 35%', checkoutUrl: CHECKOUT_URL_MF_YEARLY }
                 ]}
                 features={[
                     "Cumulative Delta Indicator",
                     "Divergence Alerts",
                     "Trapped Trader Signals",
-                    "Lifetime Updates",
+                    "Regular Updates",
                     "Email Support"
                 ]}
             />
