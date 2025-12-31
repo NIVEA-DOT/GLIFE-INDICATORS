@@ -20,7 +20,7 @@
     "noUnusedParameters": false,
     "noFallthroughCasesInSwitch": true,
     
-    /* Types */
+    /* Types - Crucial for Vite env variables */
     "types": ["vite/client"]
   },
   "include": ["src/**/*.ts", "src/**/*.tsx", "*.ts", "*.tsx"],

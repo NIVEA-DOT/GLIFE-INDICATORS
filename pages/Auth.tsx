@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Button, GlassPanel } from '../components/Shared';
+import React, { useState, useEffect } from 'react';
+import { Button, GlassPanel, Icons } from '../components/Shared';
 import { Link, useNavigate } from 'react-router-dom';
 import { supabase } from '../src/lib/supabase';
 
@@ -10,6 +10,7 @@ interface AuthProps {
 export const Auth: React.FC<AuthProps> = ({ initialMode = 'login' }) => {
     const [mode, setMode] = useState<'login' | 'signup'>(initialMode);
     const [loading, setLoading] = useState(false);
+    const [pageLoading, setPageLoading] = useState(true); // New state for initial check
     const [error, setError] = useState<string | null>(null);
     const navigate = useNavigate();
 
@@ -18,6 +19,24 @@ export const Auth: React.FC<AuthProps> = ({ initialMode = 'login' }) => {
     const [password, setPassword] = useState('');
     const [name, setName] = useState('');
 
+    // Check if already logged in
+    useEffect(() => {
+        const checkSession = async () => {
+            try {
+                const { data: { session } } = await supabase.auth.getSession();
+                if (session) {
+                    // If user is already logged in, redirect to dashboard immediately
+                    navigate('/dashboard', { replace: true });
+                } else {
+                    setPageLoading(false); // Only show form if no session
+                }
+            } catch (e) {
+                setPageLoading(false);
+            }
+        };
+        checkSession();
+    }, [navigate]);
+
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         setLoading(true);
@@ -25,7 +44,7 @@ export const Auth: React.FC<AuthProps> = ({ initialMode = 'login' }) => {
 
         try {
             if (mode === 'signup') {
-                const { error } = await supabase.auth.signUp({
+                const { error: signUpError } = await supabase.auth.signUp({
                     email,
                     password,
                     options: {
@@ -34,25 +53,43 @@ export const Auth: React.FC<AuthProps> = ({ initialMode = 'login' }) => {
                         },
                     },
                 });
-                if (error) throw error;
-                // Supabase 기본 설정은 이메일 확인이 필요합니다. 
-                // 개발 중에는 Supabase 대시보드 > Authentication > Providers > Email > "Confirm email"을 꺼두면 편합니다.
-                alert('Account created! Please check your email to verify (if enabled) or sign in.');
+                
+                if (signUpError) throw signUpError;
+                
+                alert('Account created! Please check your email to verify or sign in.');
                 setMode('login');
             } else {
-                const { error } = await supabase.auth.signInWithPassword({
+                const { data, error: signInError } = await supabase.auth.signInWithPassword({
                     email,
                     password,
                 });
-                if (error) throw error;
-                navigate('/dashboard');
+
+                if (signInError) throw signInError;
+                
+                if (data.session) {
+                    navigate('/dashboard');
+                }
             }
         } catch (err: any) {
-            setError(err.message);
+            console.error("Auth Error:", err);
+            // Translate common Supabase errors for better UX
+            let msg = err.message;
+            if (msg === "Invalid login credentials") msg = "Incorrect email or password.";
+            // Handle fallback dummy client error
+            if (msg.includes("fetch") || msg.includes("network")) msg = "Connection failed. Please check your configuration.";
+            setError(msg);
         } finally {
             setLoading(false);
         }
     };
+
+    if (pageLoading) {
+        return (
+            <div className="min-h-screen pt-32 pb-20 px-4 flex items-center justify-center">
+                 <div className="w-8 h-8 border-2 border-brand-500 border-t-transparent rounded-full animate-spin"></div>
+            </div>
+        );
+    }
 
     return (
         <div className="min-h-screen pt-32 pb-20 px-4 flex items-center justify-center relative overflow-hidden">
@@ -135,8 +172,9 @@ export const Auth: React.FC<AuthProps> = ({ initialMode = 'login' }) => {
                     </div>
 
                     {error && (
-                        <div className="text-red-500 text-sm text-center bg-red-900/10 border border-red-900/20 p-2 rounded">
-                            {error}
+                        <div className="bg-red-900/20 border border-red-500/30 p-3 rounded flex items-start gap-3">
+                            <Icons.AlertTriangle className="w-5 h-5 text-red-500 flex-shrink-0 mt-0.5" />
+                            <span className="text-red-200 text-sm">{error}</span>
                         </div>
                     )}
 

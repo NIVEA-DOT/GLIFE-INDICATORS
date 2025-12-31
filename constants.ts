@@ -10,13 +10,14 @@ export const PRODUCT_AUTO_NAME = "Footprint Auto";
 export const PRODUCT_MARKET_PROFILE = "Market Profile";
 
 // --- EXTERNAL LINKS (LemonSqueezy) ---
-// Note: UUIDs (ad78863e...) are specific to products. Ensure these UUIDs exist in your Lemon Squeezy store.
-// Updated subdomain to 'gl-systems' based on affiliate link pattern.
-export const CHECKOUT_URL_BUNDLE_MONTHLY = "https://gl-systems.lemonsqueezy.com/checkout/buy/ad78863e-ae22-4732-8e50-b0b215dd98df"; 
-export const CHECKOUT_URL_BUNDLE_LIFETIME = "https://gl-systems.lemonsqueezy.com/checkout/buy/ad78863e-ae22-4732-8e50-b0b215dd98df"; 
-export const CHECKOUT_URL_MONEY_FLOW = "https://gl-systems.lemonsqueezy.com/checkout/buy/ad78863e-ae22-4732-8e50-b0b215dd98df"; 
-export const CHECKOUT_URL_PROFILE = "https://gl-systems.lemonsqueezy.com/checkout/buy/ad78863e-ae22-4732-8e50-b0b215dd98df";
-export const CHECKOUT_URL_AUTO_SETUP = "https://gl-systems.lemonsqueezy.com/checkout/gl-auto-setup";
+// IMPORTANT: Replace these with your actual Product Checkout Links from Lemon Squeezy.
+// Currently set to '#' or homepage to prevent 404 errors.
+
+export const CHECKOUT_URL_BUNDLE_MONTHLY = "https://lemonsqueezy.com/"; 
+export const CHECKOUT_URL_BUNDLE_LIFETIME = "https://lemonsqueezy.com/"; 
+export const CHECKOUT_URL_MONEY_FLOW = "https://lemonsqueezy.com/"; 
+export const CHECKOUT_URL_PROFILE = "https://lemonsqueezy.com/";
+export const CHECKOUT_URL_AUTO_SETUP = "https://lemonsqueezy.com/";
 
 // --- AFFILIATE ---
 export const AFFILIATE_SIGNUP_URL = "https://gl-systems.lemonsqueezy.com/affiliates";
