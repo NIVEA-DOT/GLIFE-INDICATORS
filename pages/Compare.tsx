@@ -9,31 +9,58 @@ export const Compare: React.FC = () => {
 
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 
-                {/* --- GUIDED PATHS --- */}
-                <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-16">
-                    <div className="p-4 rounded-lg bg-zinc-900/30 border border-zinc-800 text-center hover:border-brand-500/50 transition-colors">
-                        <div className="text-xs text-zinc-500 uppercase tracking-wide mb-2">Best for Beginners</div>
-                        <h4 className="text-white font-bold mb-2">{PRODUCT_BUNDLE_NAME}</h4>
-                        <p className="text-xs text-zinc-400 mb-4">Complete visualization suite.</p>
-                        <Button size="sm" variant="outline" className="w-full" asLink to="/product/bundle">View</Button>
+                {/* --- GUIDED PATHS (VERTICAL STACK) --- */}
+                <div className="flex flex-col gap-4 max-w-2xl mx-auto mb-20">
+                    <div className="p-6 rounded-lg bg-zinc-900/30 border border-zinc-800 flex items-center justify-between hover:border-brand-500/50 transition-colors group">
+                        <div className="flex items-center gap-4">
+                            <div className="w-10 h-10 rounded bg-zinc-800 flex items-center justify-center text-zinc-400 group-hover:bg-brand-500 group-hover:text-white transition-colors">
+                                <Icons.Layers className="w-5 h-5"/>
+                            </div>
+                            <div>
+                                <h4 className="text-white font-bold">{PRODUCT_BUNDLE_NAME}</h4>
+                                <p className="text-xs text-zinc-400">Best for Beginners & Pros. Complete visualization.</p>
+                            </div>
+                        </div>
+                        <Button size="sm" variant="outline" asLink to="/indicators/bundle">View</Button>
                     </div>
-                    <div className="p-4 rounded-lg bg-zinc-900/30 border border-zinc-800 text-center hover:border-brand-500/50 transition-colors">
-                        <div className="text-xs text-zinc-500 uppercase tracking-wide mb-2">Best for Scalpers</div>
-                        <h4 className="text-white font-bold mb-2">{PRODUCT_MONEY_FLOW}</h4>
-                        <p className="text-xs text-zinc-400 mb-4">Delta divergence signals.</p>
-                        <Button size="sm" variant="outline" className="w-full" asLink to="/product/money-flow">View</Button>
+
+                    <div className="p-6 rounded-lg bg-zinc-900/30 border border-zinc-800 flex items-center justify-between hover:border-brand-500/50 transition-colors group">
+                        <div className="flex items-center gap-4">
+                            <div className="w-10 h-10 rounded bg-zinc-800 flex items-center justify-center text-zinc-400 group-hover:bg-brand-secondary group-hover:text-white transition-colors">
+                                <Icons.TrendingUp className="w-5 h-5"/>
+                            </div>
+                            <div>
+                                <h4 className="text-white font-bold">{PRODUCT_MONEY_FLOW}</h4>
+                                <p className="text-xs text-zinc-400">Best for Scalpers. Delta divergence signals.</p>
+                            </div>
+                        </div>
+                        <Button size="sm" variant="outline" asLink to="/indicators/money-flow">View</Button>
                     </div>
-                    <div className="p-4 rounded-lg bg-zinc-900/30 border border-zinc-800 text-center hover:border-brand-500/50 transition-colors">
-                        <div className="text-xs text-zinc-500 uppercase tracking-wide mb-2">Best for Analysts</div>
-                        <h4 className="text-white font-bold mb-2">{PRODUCT_MARKET_PROFILE}</h4>
-                        <p className="text-xs text-zinc-400 mb-4">TPO & Volume Profile.</p>
-                        <Button size="sm" variant="outline" className="w-full" asLink to="/product/market-profile">View</Button>
+
+                    <div className="p-6 rounded-lg bg-zinc-900/30 border border-zinc-800 flex items-center justify-between hover:border-brand-500/50 transition-colors group">
+                        <div className="flex items-center gap-4">
+                            <div className="w-10 h-10 rounded bg-zinc-800 flex items-center justify-center text-zinc-400 group-hover:bg-cyan-500 group-hover:text-white transition-colors">
+                                <Icons.BarChart className="w-5 h-5"/>
+                            </div>
+                            <div>
+                                <h4 className="text-white font-bold">{PRODUCT_MARKET_PROFILE}</h4>
+                                <p className="text-xs text-zinc-400">Best for Analysts. TPO & Volume Profile.</p>
+                            </div>
+                        </div>
+                        <Button size="sm" variant="outline" asLink to="/indicators/profile">View</Button>
                     </div>
-                    <div className="p-4 rounded-lg bg-zinc-900/30 border border-zinc-800 text-center hover:border-brand-500/50 transition-colors">
-                        <div className="text-xs text-zinc-500 uppercase tracking-wide mb-2">Institutional</div>
-                        <h4 className="text-white font-bold mb-2">{PRODUCT_AUTO_NAME}</h4>
-                        <p className="text-xs text-zinc-400 mb-4">Automated Execution.</p>
-                        <Button size="sm" variant="outline" className="w-full" asLink to="/product/auto">View</Button>
+
+                    <div className="p-6 rounded-lg bg-zinc-900/30 border border-zinc-800 flex items-center justify-between hover:border-brand-500/50 transition-colors group">
+                        <div className="flex items-center gap-4">
+                            <div className="w-10 h-10 rounded bg-zinc-800 flex items-center justify-center text-zinc-400 group-hover:bg-violet-500 group-hover:text-white transition-colors">
+                                <Icons.Cpu className="w-5 h-5"/>
+                            </div>
+                            <div>
+                                <h4 className="text-white font-bold">{PRODUCT_AUTO_NAME}</h4>
+                                <p className="text-xs text-zinc-400">Institutional. Automated Execution.</p>
+                            </div>
+                        </div>
+                        <Button size="sm" variant="outline" asLink to="/indicators/auto">View</Button>
                     </div>
                 </div>
 
@@ -119,7 +146,7 @@ export const Compare: React.FC = () => {
                                     <td className="p-6 text-center"><Button size="sm" variant="glow" asLink to="/checkout?product=bundle">Buy Bundle</Button></td>
                                     <td className="p-6 text-center"><Button size="sm" variant="secondary" asLink to="/checkout?product=money_flow">Buy</Button></td>
                                     <td className="p-6 text-center"><Button size="sm" variant="secondary" asLink to="/checkout?product=profile">Buy</Button></td>
-                                    <td className="p-6 text-center"><Button size="sm" variant="outline" asLink to="/product/auto">Apply</Button></td>
+                                    <td className="p-6 text-center"><Button size="sm" variant="outline" asLink to="/indicators/auto">Apply</Button></td>
                                 </tr>
                             </tbody>
                         </table>

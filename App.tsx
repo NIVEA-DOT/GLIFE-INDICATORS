@@ -13,6 +13,9 @@ import { Support, Affiliate, Success, Terms, Privacy, Refund } from './pages/Mis
 import { Auth } from './pages/Auth';
 import { Dashboard } from './pages/Dashboard';
 import { Debug } from './pages/Debug';
+import { Pricing } from './pages/Pricing';
+import { Checkout } from './pages/Checkout';
+import { Compare } from './pages/Compare';
 
 const ScrollToTop = () => {
   const { pathname } = useLocation();
@@ -37,6 +40,9 @@ const App: React.FC = () => {
 
           {/* New Navigation Structure */}
           <Route path="/features" element={<Features />} />
+          <Route path="/pricing" element={<Pricing />} />
+          <Route path="/compare" element={<Compare />} />
+          <Route path="/checkout" element={<Checkout />} />
           
           {/* Indicators (Product Details) */}
           <Route path="/indicators/bundle" element={<GLBundle />} />

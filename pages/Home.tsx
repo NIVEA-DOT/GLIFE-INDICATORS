@@ -145,72 +145,115 @@ export const Home: React.FC = () => {
         </div>
       </section>
 
-      {/* PRODUCTS SPLIT */}
-      <section className="py-32 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      {/* PRODUCTS SPLIT - VERTICAL STACK */}
+      <section className="py-32 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
           <SectionHeader title="Institutional Tool Suite" subtitle="Four core systems designed for professional execution." />
           
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="flex flex-col gap-6">
+              
               {/* Product 1: GL Bundle (Main) */}
-              <GlassPanel className="hover:border-brand-500/30 transition-colors group relative">
-                   <div className="absolute -inset-px bg-brand-500/5 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity"></div>
-                  <div className="relative">
-                    <div className="flex justify-between items-start mb-6">
-                        <div className="p-3 bg-zinc-900 rounded border border-zinc-800 text-brand-500">
-                            <Icons.Layers />
+              <GlassPanel className="hover:border-brand-500/30 transition-all duration-300 group relative p-8">
+                   <div className="absolute -inset-px bg-brand-500/5 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none"></div>
+                   <div className="relative flex flex-col md:flex-row gap-8 items-center">
+                        <div className="w-full md:w-auto flex-shrink-0 flex md:block justify-between items-start">
+                             <div className="p-4 bg-zinc-900 rounded-xl border border-zinc-800 text-brand-500 mb-4 inline-block">
+                                <Icons.Layers className="w-8 h-8"/>
+                             </div>
+                             <div className="md:hidden">
+                                <Badge color="violet">Best Value</Badge>
+                             </div>
                         </div>
-                        <Badge color="violet">Best Value</Badge>
-                    </div>
-                    <h3 className="text-2xl font-bold text-white mb-2">{PRODUCT_BUNDLE_NAME}</h3>
-                    <p className="text-zinc-400 mb-6">
-                        The all-in-one toolkit. Includes <strong>GL Box</strong> (Structure), <strong>GL Vega</strong> (Velocity), and <strong>GL Navigator</strong> (Context).
-                    </p>
-                    <Button variant="outline" className="w-full group-hover:bg-brand-600 group-hover:text-white group-hover:border-brand-600 transition-all" asLink to="/product/bundle">Unlock Bundle</Button>
-                  </div>
+                        <div className="flex-grow text-center md:text-left">
+                            <div className="flex items-center gap-3 justify-center md:justify-start mb-2">
+                                <h3 className="text-2xl font-bold text-white">{PRODUCT_BUNDLE_NAME}</h3>
+                                <div className="hidden md:block"><Badge color="violet">Best Value</Badge></div>
+                            </div>
+                            <p className="text-zinc-400 leading-relaxed">
+                                The all-in-one toolkit. Includes <strong>GL Box</strong> (Structure), <strong>GL Vega</strong> (Velocity), and <strong>GL Navigator</strong> (Context).
+                            </p>
+                        </div>
+                        <div className="w-full md:w-auto flex-shrink-0">
+                            <Button variant="outline" className="w-full md:w-40 group-hover:bg-brand-600 group-hover:text-white group-hover:border-brand-600 transition-all" asLink to="/indicators/bundle">Unlock Bundle</Button>
+                        </div>
+                   </div>
               </GlassPanel>
 
                {/* Product 2: Money Flow */}
-               <GlassPanel className="hover:border-brand-secondary/30 transition-colors group">
-                  <div className="flex justify-between items-start mb-6">
-                      <div className="p-3 bg-zinc-900 rounded border border-zinc-800 text-brand-secondary">
-                          <Icons.TrendingUp />
+               <GlassPanel className="hover:border-brand-secondary/30 transition-all duration-300 group p-8">
+                  <div className="flex flex-col md:flex-row gap-8 items-center">
+                      <div className="w-full md:w-auto flex-shrink-0 flex md:block justify-between items-start">
+                          <div className="p-4 bg-zinc-900 rounded-xl border border-zinc-800 text-brand-secondary mb-4 inline-block">
+                              <Icons.TrendingUp className="w-8 h-8"/>
+                          </div>
+                          <div className="md:hidden">
+                             <Badge color="zinc">Indicator</Badge>
+                          </div>
                       </div>
-                      <Badge color="zinc">Indicator</Badge>
+                      <div className="flex-grow text-center md:text-left">
+                          <div className="flex items-center gap-3 justify-center md:justify-start mb-2">
+                              <h3 className="text-2xl font-bold text-white">{PRODUCT_MONEY_FLOW}</h3>
+                              <div className="hidden md:block"><Badge color="zinc">Indicator</Badge></div>
+                          </div>
+                          <p className="text-zinc-400 leading-relaxed">
+                              <strong>Stop Runs</strong> detector. See Cumulative Delta divergences and trapped traders in real-time.
+                          </p>
+                      </div>
+                      <div className="w-full md:w-auto flex-shrink-0">
+                          <Button variant="outline" className="w-full md:w-40 group-hover:border-brand-secondary group-hover:text-brand-secondary transition-all" asLink to="/indicators/money-flow">View Indicator</Button>
+                      </div>
                   </div>
-                  <h3 className="text-2xl font-bold text-white mb-2">{PRODUCT_MONEY_FLOW}</h3>
-                  <p className="text-zinc-400 mb-6">
-                      <strong>Stop Runs</strong> detector. See Cumulative Delta divergences and trapped traders in real-time.
-                  </p>
-                  <Button variant="outline" className="w-full group-hover:border-brand-secondary group-hover:text-brand-secondary transition-all" asLink to="/pricing">View Indicator</Button>
               </GlassPanel>
 
               {/* Product 3: Market Profile */}
-              <GlassPanel className="hover:border-cyan-500/30 transition-colors group">
-                  <div className="flex justify-between items-start mb-6">
-                      <div className="p-3 bg-zinc-900 rounded border border-zinc-800 text-cyan-500">
-                          <Icons.BarChart />
+              <GlassPanel className="hover:border-cyan-500/30 transition-all duration-300 group p-8">
+                  <div className="flex flex-col md:flex-row gap-8 items-center">
+                      <div className="w-full md:w-auto flex-shrink-0 flex md:block justify-between items-start">
+                          <div className="p-4 bg-zinc-900 rounded-xl border border-zinc-800 text-cyan-500 mb-4 inline-block">
+                              <Icons.BarChart className="w-8 h-8"/>
+                          </div>
+                          <div className="md:hidden">
+                             <Badge color="zinc">Analytics</Badge>
+                          </div>
                       </div>
-                      <Badge color="zinc">Analytics</Badge>
+                      <div className="flex-grow text-center md:text-left">
+                          <div className="flex items-center gap-3 justify-center md:justify-start mb-2">
+                              <h3 className="text-2xl font-bold text-white">{PRODUCT_MARKET_PROFILE}</h3>
+                              <div className="hidden md:block"><Badge color="zinc">Analytics</Badge></div>
+                          </div>
+                          <p className="text-zinc-400 leading-relaxed">
+                              <strong>Replay</strong> and TPO Analysis. Understand the auction context with historical volume profiles.
+                          </p>
+                      </div>
+                      <div className="w-full md:w-auto flex-shrink-0">
+                          <Button variant="outline" className="w-full md:w-40 group-hover:border-cyan-500 group-hover:text-cyan-500 transition-all" asLink to="/indicators/profile">View Profile</Button>
+                      </div>
                   </div>
-                  <h3 className="text-2xl font-bold text-white mb-2">{PRODUCT_MARKET_PROFILE}</h3>
-                  <p className="text-zinc-400 mb-6">
-                      <strong>Replay</strong> and TPO Analysis. Understand the auction context with historical volume profiles.
-                  </p>
-                  <Button variant="outline" className="w-full group-hover:border-cyan-500 group-hover:text-cyan-500 transition-all" asLink to="/pricing">View Profile</Button>
               </GlassPanel>
 
               {/* Product 4: Auto Trading */}
-              <GlassPanel className="hover:border-brand-600/30 transition-colors group relative overflow-hidden bg-gradient-to-b from-brand-900/10 to-transparent">
-                  <div className="flex justify-between items-start mb-6">
-                      <div className="p-3 bg-zinc-900 rounded border border-zinc-800 text-white">
-                          <Icons.Cpu />
+              <GlassPanel className="hover:border-brand-600/30 transition-all duration-300 group relative overflow-hidden bg-gradient-to-r from-transparent to-brand-900/10 p-8">
+                  <div className="flex flex-col md:flex-row gap-8 items-center relative z-10">
+                      <div className="w-full md:w-auto flex-shrink-0 flex md:block justify-between items-start">
+                          <div className="p-4 bg-zinc-900 rounded-xl border border-zinc-800 text-white mb-4 inline-block">
+                              <Icons.Cpu className="w-8 h-8"/>
+                          </div>
+                          <div className="md:hidden">
+                             <Badge color="violet">Algorithmic</Badge>
+                          </div>
                       </div>
-                      <Badge color="violet">Algorithmic</Badge>
+                      <div className="flex-grow text-center md:text-left">
+                          <div className="flex items-center gap-3 justify-center md:justify-start mb-2">
+                              <h3 className="text-2xl font-bold text-white">{PRODUCT_AUTO_NAME}</h3>
+                              <div className="hidden md:block"><Badge color="violet">Algorithmic</Badge></div>
+                          </div>
+                          <p className="text-zinc-400 leading-relaxed">
+                              <strong>Iceberg Execution</strong>. Fully automated strategies based on orderflow imbalances. Application only.
+                          </p>
+                      </div>
+                      <div className="w-full md:w-auto flex-shrink-0">
+                          <Button variant="glow" className="w-full md:w-40" asLink to="/indicators/auto">Apply</Button>
+                      </div>
                   </div>
-                  <h3 className="text-2xl font-bold text-white mb-2">{PRODUCT_AUTO_NAME}</h3>
-                  <p className="text-zinc-400 mb-6">
-                      <strong>Iceberg Execution</strong>. Fully automated strategies based on orderflow imbalances. Application only.
-                  </p>
-                  <Button variant="glow" className="w-full" asLink to="/product/auto">Apply for Access</Button>
               </GlassPanel>
           </div>
       </section>

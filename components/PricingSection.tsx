@@ -26,7 +26,7 @@ export const PricingSection: React.FC<PricingSectionProps> = ({ title = "Select 
 
     return (
         <div id="pricing" className="py-20 bg-zinc-900/10 border-t border-zinc-900">
-            <div className="max-w-4xl mx-auto px-4">
+            <div className="max-w-3xl mx-auto px-4">
                 
                 {/* Header */}
                 <div className="text-center mb-10">
@@ -69,62 +69,61 @@ export const PricingSection: React.FC<PricingSectionProps> = ({ title = "Select 
                     </div>
                 )}
 
-                {/* Main Pricing Card */}
+                {/* Main Pricing Card - CHANGED TO VERTICAL STACK */}
                 <div className="relative">
                      <div className="absolute -inset-1 bg-gradient-to-b from-brand-500/20 to-transparent blur-xl opacity-50 rounded-2xl"></div>
-                     <GlassPanel className="relative border-brand-500/30">
-                        <div className="flex flex-col md:flex-row items-center justify-between gap-8">
-                            
-                            {/* Price Display */}
-                            <div className="text-center md:text-left">
-                                <div className="text-sm text-zinc-500 mb-1 uppercase tracking-wider">Total</div>
-                                <div className="flex items-baseline justify-center md:justify-start gap-1 transition-all duration-300 transform key={selectedPeriod}">
-                                    <span className="text-5xl md:text-6xl font-bold text-white tracking-tight animate-fadeIn">
-                                        ${activeOption.price}
-                                    </span>
-                                    <span className="text-xl text-zinc-500">
-                                        {activeOption.period === 'lifetime' ? '/ life' : 
-                                         activeOption.period === 'monthly' ? '/ mo' : 
-                                         activeOption.period === 'quarterly' ? '/ qtr' : '/ yr'}
-                                    </span>
-                                </div>
-                                <p className="text-xs text-brand-400 mt-2">
-                                    {activeOption.period === 'lifetime' ? 'One-time payment. Own it forever.' :
-                                     activeOption.period === 'yearly' ? 'Billed annually. Best value.' : 
-                                     activeOption.period === 'quarterly' ? 'Billed every 3 months.' : 'Flexible monthly billing.'}
-                                </p>
+                     <GlassPanel className="relative border-brand-500/30 text-center p-10">
+                        
+                        {/* 1. Price Display */}
+                        <div className="mb-8">
+                            <div className="text-sm text-zinc-500 mb-2 uppercase tracking-wider font-bold">Total Investment</div>
+                            <div className="flex items-baseline justify-center gap-1 transition-all duration-300 transform key={selectedPeriod}">
+                                <span className="text-6xl md:text-7xl font-bold text-white tracking-tight animate-fadeIn">
+                                    ${activeOption.price}
+                                </span>
+                                <span className="text-2xl text-zinc-500">
+                                    {activeOption.period === 'lifetime' ? '/ life' : 
+                                     activeOption.period === 'monthly' ? '/ mo' : 
+                                     activeOption.period === 'quarterly' ? '/ qtr' : '/ yr'}
+                                </span>
                             </div>
+                            <p className="text-sm text-brand-400 mt-3 font-medium bg-brand-500/10 inline-block px-3 py-1 rounded-full border border-brand-500/20">
+                                {activeOption.period === 'lifetime' ? 'One-time payment. Own it forever.' :
+                                 activeOption.period === 'yearly' ? 'Billed annually. Best value.' : 
+                                 activeOption.period === 'quarterly' ? 'Billed every 3 months.' : 'Flexible monthly billing.'}
+                            </p>
+                        </div>
 
-                            {/* Features List */}
-                            <div className="flex-grow border-t md:border-t-0 md:border-l border-zinc-800 pt-6 md:pt-0 md:pl-8 w-full md:w-auto">
-                                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                                    {features.map((feat, i) => (
-                                        <div key={i} className="flex items-center gap-2 text-sm text-zinc-300">
-                                            <div className="w-5 h-5 rounded-full bg-brand-500/10 flex items-center justify-center shrink-0">
-                                                <Icons.Check className="w-3 h-3 text-brand-500" />
-                                            </div>
-                                            {feat}
+                        {/* 2. Features List (Centered) */}
+                        <div className="border-t border-b border-zinc-800 py-8 mb-8">
+                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-left max-w-lg mx-auto">
+                                {features.map((feat, i) => (
+                                    <div key={i} className="flex items-center gap-3 text-sm text-zinc-300">
+                                        <div className="w-6 h-6 rounded-full bg-brand-500/10 flex items-center justify-center shrink-0 border border-brand-500/20">
+                                            <Icons.Check className="w-3.5 h-3.5 text-brand-500" />
                                         </div>
-                                    ))}
-                                </div>
-                            </div>
-
-                            {/* CTA */}
-                            <div className="w-full md:w-auto shrink-0 flex flex-col gap-3">
-                                <Button size="lg" variant="glow" className="w-full" asLink to={activeOption.checkoutUrl} external>
-                                    {activeOption.period === 'lifetime' ? 'Buy Now' : 'Subscribe Now'}
-                                </Button>
-                                {lifetimeOption && (
-                                    <a href={lifetimeOption.url} target="_blank" rel="noreferrer" className="text-xs text-center text-zinc-500 hover:text-white transition-colors">
-                                        Or buy Lifetime for ${lifetimeOption.price}
-                                    </a>
-                                )}
+                                        {feat}
+                                    </div>
+                                ))}
                             </div>
                         </div>
+
+                        {/* 3. CTA */}
+                        <div className="flex flex-col items-center gap-4">
+                            <Button size="lg" variant="glow" className="w-full max-w-sm h-14 text-lg" asLink to={activeOption.checkoutUrl} external>
+                                {activeOption.period === 'lifetime' ? 'Buy Now' : 'Subscribe Now'}
+                            </Button>
+                            {lifetimeOption && (
+                                <a href={lifetimeOption.url} target="_blank" rel="noreferrer" className="text-sm text-zinc-500 hover:text-white transition-colors underline decoration-zinc-700 underline-offset-4">
+                                    Or buy Lifetime License for ${lifetimeOption.price}
+                                </a>
+                            )}
+                        </div>
+
                      </GlassPanel>
                 </div>
 
-                <div className="mt-8 text-center flex items-center justify-center gap-6 text-zinc-500 text-sm">
+                <div className="mt-10 text-center flex flex-wrap justify-center gap-6 text-zinc-500 text-sm">
                     <span className="flex items-center gap-2"><Icons.Lock className="w-4 h-4"/> Secure Payment</span>
                     <span className="flex items-center gap-2"><Icons.Zap className="w-4 h-4"/> Instant Delivery</span>
                     <span className="flex items-center gap-2"><Icons.Check className="w-4 h-4"/> 14-Day Guarantee</span>
