@@ -15,6 +15,7 @@ interface License {
 export const Dashboard: React.FC = () => {
     const navigate = useNavigate();
     const [userName, setUserName] = useState('');
+    const [userEmail, setUserEmail] = useState('');
     const [licenses, setLicenses] = useState<License[]>([]);
     const [loading, setLoading] = useState(true);
     
@@ -29,6 +30,8 @@ export const Dashboard: React.FC = () => {
             navigate('/login');
             return;
         }
+
+        setUserEmail(user.email || '');
 
         // Fetch Profile Name
         const { data: profile } = await supabase
@@ -133,4 +136,32 @@ export const Dashboard: React.FC = () => {
 
                          <GlassPanel>
                              <div className="flex items-center gap-4 mb-6">
-                               
+                                 <div className="w-12 h-12 bg-zinc-800 rounded-full flex items-center justify-center text-zinc-400">
+                                     <Icons.Check className="w-6 h-6"/>
+                                 </div>
+                                 <div>
+                                     <div className="text-white font-bold">{userName}</div>
+                                     <div className="text-xs text-zinc-500">{userEmail}</div>
+                                 </div>
+                             </div>
+                             <div className="space-y-3">
+                                 <Button variant="outline" className="w-full justify-start" asLink to="/support">
+                                     <Icons.Activity className="w-4 h-4 mr-2"/> Support Tickets
+                                 </Button>
+                                 <Button variant="outline" className="w-full justify-start" asLink to="/affiliates">
+                                     <Icons.TrendingUp className="w-4 h-4 mr-2"/> Affiliate Portal
+                                 </Button>
+                             </div>
+                         </GlassPanel>
+
+                         <GlassPanel className="bg-gradient-to-br from-brand-900/20 to-zinc-900/50 border-brand-500/20">
+                             <h3 className="text-white font-bold mb-2">Join the Community</h3>
+                             <p className="text-xs text-zinc-400 mb-4">Connect with other professional traders in our private Discord.</p>
+                             <Button variant="secondary" className="w-full text-xs">Launch Discord</Button>
+                         </GlassPanel>
+                     </div>
+                 </div>
+             </div>
+        </div>
+    );
+};
