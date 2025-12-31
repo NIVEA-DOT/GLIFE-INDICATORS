@@ -2,19 +2,35 @@ import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { BRAND_NAME } from '../constants';
 import { Button, Icons } from './Shared';
+import { supabase } from '../src/lib/supabase';
 
 export const Navbar: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
   const location = useLocation();
   
-  // Check mock auth state
-  const isAuthenticated = !!localStorage.getItem('gl_auth_token');
-
   useEffect(() => {
+    // 1. Check Initial Session
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      setIsAuthenticated(!!session);
+    });
+
+    // 2. Listen for Auth Changes (Login/Logout)
+    const {
+      data: { subscription },
+    } = supabase.auth.onAuthStateChange((_event, session) => {
+      setIsAuthenticated(!!session);
+    });
+
+    // Scroll Handler
     const handleScroll = () => setScrolled(window.scrollY > 20);
     window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+
+    return () => {
+      subscription.unsubscribe();
+      window.removeEventListener('scroll', handleScroll);
+    };
   }, []);
 
   const isActive = (path: string) => location.pathname === path;
