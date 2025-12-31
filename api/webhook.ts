@@ -1,6 +1,6 @@
 import { createClient } from '@supabase/supabase-js';
-import crypto from 'crypto';
-import { Buffer } from 'buffer';
+import crypto from 'node:crypto';
+import { Buffer } from 'node:buffer';
 
 // Supabase Admin Client
 // Vercel 환경 변수 이름이 다를 경우를 대비해 Fallback 처리
@@ -20,7 +20,7 @@ export default async function handler(req: any, res: any) {
     const rawBody = JSON.stringify(req.body);
     const hmac = crypto.createHmac('sha256', webhookSecret || '');
     
-    // Node.js 환경에서는 Buffer가 전역으로 사용 가능합니다.
+    // Node.js 환경에서는 Buffer가 전역으로 사용 가능하지만, node:buffer를 import하여 타입을 명시합니다.
     const digest = Buffer.from(hmac.update(rawBody).digest('hex'), 'utf8');
     const signature = Buffer.from(req.headers['x-signature'] || '', 'utf8');
 
