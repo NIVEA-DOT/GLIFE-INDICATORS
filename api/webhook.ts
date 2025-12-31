@@ -20,7 +20,7 @@ export default async function handler(req: any, res: any) {
     const rawBody = JSON.stringify(req.body);
     const hmac = crypto.createHmac('sha256', webhookSecret || '');
     
-    // Node.js 환경에서는 Buffer가 전역으로 사용 가능하지만, 명시적으로 처리
+    // Node.js 환경에서는 Buffer가 전역으로 사용 가능합니다.
     const digest = Buffer.from(hmac.update(rawBody).digest('hex'), 'utf8');
     const signature = Buffer.from(req.headers['x-signature'] || '', 'utf8');
 

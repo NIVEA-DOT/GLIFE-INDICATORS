@@ -37,7 +37,7 @@ export const Navbar: React.FC = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-20">
           
-          {/* Logo */}
+          {/* 1. Left: Logo */}
           <div className="flex-shrink-0 flex items-center">
             <Link to="/" className="text-xl font-bold tracking-tighter text-white flex items-center gap-2 group">
                <div className="relative w-8 h-8 flex items-center justify-center">
@@ -48,75 +48,80 @@ export const Navbar: React.FC = () => {
             </Link>
           </div>
           
-          {/* Desktop Menu */}
-          <div className="hidden md:flex items-center space-x-10">
+          {/* 2. Right: Navigation & Actions (Combined for 2-column layout) */}
+          <div className="hidden md:flex items-center gap-8">
             
-            <Link 
-                to="/features" 
-                className={`text-sm font-medium transition-all ${location.pathname === '/features' ? 'text-white' : 'text-zinc-400 hover:text-white'}`}
-            >
-                Features
-            </Link>
+            {/* Nav Links */}
+            <div className="flex items-center space-x-8">
+                <Link 
+                    to="/features" 
+                    className={`text-sm font-medium transition-all ${location.pathname === '/features' ? 'text-white' : 'text-zinc-400 hover:text-white'}`}
+                >
+                    Features
+                </Link>
 
-            {/* Indicators Dropdown */}
-            <div className="relative group">
-                <button className={`text-sm font-medium flex items-center gap-1 py-4 transition-colors ${isActive('/indicators') ? 'text-white' : 'text-zinc-400 hover:text-white'}`}>
-                    Indicators <Icons.ChevronDown className="w-4 h-4" />
-                </button>
-                <div className="absolute top-full left-1/2 -translate-x-1/2 w-80 pt-4 hidden group-hover:block">
-                    <div className="bg-[#09090b] border border-zinc-800 rounded-xl shadow-2xl shadow-black overflow-hidden p-2">
-                         <div className="px-3 py-2 text-[10px] font-bold text-zinc-500 uppercase tracking-widest">Systems</div>
-                         
-                         <Link to="/indicators/bundle" className="block px-3 py-3 hover:bg-zinc-900 rounded-lg transition-colors group/item">
-                             <div className="font-medium text-white group-hover/item:text-brand-400 transition-colors flex items-center gap-2">
-                                 GL Bundle <span className="bg-brand-500/20 text-brand-300 text-[9px] px-1.5 rounded uppercase">Best</span>
-                             </div>
-                             <div className="text-xs text-zinc-500 mt-0.5">Full Suite (Box, Vega, Navigator)</div>
-                         </Link>
+                {/* Indicators Dropdown */}
+                <div className="relative group">
+                    <button className={`text-sm font-medium flex items-center gap-1 py-4 transition-colors ${isActive('/indicators') ? 'text-white' : 'text-zinc-400 hover:text-white'}`}>
+                        Indicators <Icons.ChevronDown className="w-4 h-4" />
+                    </button>
+                    <div className="absolute top-full right-0 w-80 pt-4 hidden group-hover:block">
+                        <div className="bg-[#09090b] border border-zinc-800 rounded-xl shadow-2xl shadow-black overflow-hidden p-2">
+                             <div className="px-3 py-2 text-[10px] font-bold text-zinc-500 uppercase tracking-widest">Systems</div>
+                             
+                             <Link to="/indicators/bundle" className="block px-3 py-3 hover:bg-zinc-900 rounded-lg transition-colors group/item">
+                                 <div className="font-medium text-white group-hover/item:text-brand-400 transition-colors flex items-center gap-2">
+                                     GL Bundle <span className="bg-brand-500/20 text-brand-300 text-[9px] px-1.5 rounded uppercase">Best</span>
+                                 </div>
+                                 <div className="text-xs text-zinc-500 mt-0.5">Full Suite (Box, Vega, Navigator)</div>
+                             </Link>
 
-                         <Link to="/indicators/auto" className="block px-3 py-3 hover:bg-zinc-900 rounded-lg transition-colors group/item">
-                             <div className="font-medium text-white group-hover/item:text-brand-400 transition-colors">
-                                 Footprint Auto
-                             </div>
-                             <div className="text-xs text-zinc-500 mt-0.5">Automated Execution Algo</div>
-                         </Link>
+                             <Link to="/indicators/auto" className="block px-3 py-3 hover:bg-zinc-900 rounded-lg transition-colors group/item">
+                                 <div className="font-medium text-white group-hover/item:text-brand-400 transition-colors">
+                                     Footprint Auto
+                                 </div>
+                                 <div className="text-xs text-zinc-500 mt-0.5">Automated Execution Algo</div>
+                             </Link>
 
-                         <div className="my-2 border-t border-zinc-800"></div>
-                         <div className="px-3 py-2 text-[10px] font-bold text-zinc-500 uppercase tracking-widest">Standalone</div>
+                             <div className="my-2 border-t border-zinc-800"></div>
+                             <div className="px-3 py-2 text-[10px] font-bold text-zinc-500 uppercase tracking-widest">Standalone</div>
 
-                         <Link to="/indicators/money-flow" className="block px-3 py-3 hover:bg-zinc-900 rounded-lg transition-colors group/item">
-                             <div className="font-medium text-white group-hover/item:text-brand-400 transition-colors">
-                                 Money Flow
-                             </div>
-                             <div className="text-xs text-zinc-500 mt-0.5">Divergence Indicator</div>
-                         </Link>
+                             <Link to="/indicators/money-flow" className="block px-3 py-3 hover:bg-zinc-900 rounded-lg transition-colors group/item">
+                                 <div className="font-medium text-white group-hover/item:text-brand-400 transition-colors">
+                                     Money Flow
+                                 </div>
+                                 <div className="text-xs text-zinc-500 mt-0.5">Divergence Indicator</div>
+                             </Link>
 
-                         <Link to="/indicators/profile" className="block px-3 py-3 hover:bg-zinc-900 rounded-lg transition-colors group/item">
-                             <div className="font-medium text-white group-hover/item:text-brand-400 transition-colors">
-                                 Market Profile
-                             </div>
-                             <div className="text-xs text-zinc-500 mt-0.5">TPO & Volume Analysis</div>
-                         </Link>
+                             <Link to="/indicators/profile" className="block px-3 py-3 hover:bg-zinc-900 rounded-lg transition-colors group/item">
+                                 <div className="font-medium text-white group-hover/item:text-brand-400 transition-colors">
+                                     Market Profile
+                                 </div>
+                                 <div className="text-xs text-zinc-500 mt-0.5">TPO & Volume Analysis</div>
+                             </Link>
+                        </div>
                     </div>
                 </div>
             </div>
 
-          </div>
+            {/* Separator */}
+            <div className="h-4 w-px bg-zinc-800"></div>
 
-          {/* Right Actions */}
-          <div className="hidden md:flex items-center space-x-4">
-             {isAuthenticated ? (
-                 <Link to="/dashboard" className="text-sm font-medium text-white hover:text-brand-400 transition-colors flex items-center gap-2">
-                    <div className="w-2 h-2 bg-emerald-500 rounded-full"></div> Dashboard
-                 </Link>
-             ) : (
-                 <Link to="/login" className="text-sm font-medium text-zinc-400 hover:text-white transition-colors">Log In</Link>
-             )}
-             
-             {/* Primary CTA */}
-             <Button variant="glow" size="sm" asLink to="/indicators/bundle">
-                Get Started
-             </Button>
+            {/* Action Buttons */}
+            <div className="flex items-center space-x-4">
+                 {isAuthenticated ? (
+                     <Link to="/dashboard" className="text-sm font-medium text-white hover:text-brand-400 transition-colors flex items-center gap-2">
+                        <div className="w-2 h-2 bg-emerald-500 rounded-full"></div> Dashboard
+                     </Link>
+                 ) : (
+                     <Link to="/login" className="text-sm font-medium text-zinc-400 hover:text-white transition-colors">Log In</Link>
+                 )}
+                 
+                 <Button variant="glow" size="sm" asLink to="/indicators/bundle">
+                    Get Started
+                 </Button>
+            </div>
+
           </div>
 
           {/* Mobile menu button */}
