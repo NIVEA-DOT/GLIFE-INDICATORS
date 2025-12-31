@@ -1,9 +1,9 @@
 import { createClient } from '@supabase/supabase-js';
 
 // Initialize Supabase Client (Server-side)
-// Note: In Vercel, process.env is available automatically.
-const supabaseUrl = process.env.VITE_SUPABASE_URL;
-const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY; // Use Service Role Key for admin tasks!
+// Fallback to non-standard naming if VITE_ prefix is missing
+const supabaseUrl = process.env.VITE_SUPABASE_URL || process.env.Supabase_URL;
+const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.supabase_service_role;
 
 export default async function handler(request: any, response: any) {
   // CORS Setup
@@ -25,7 +25,7 @@ export default async function handler(request: any, response: any) {
   }
 
   if (!supabaseUrl || !supabaseKey) {
-    return response.status(500).json({ error: 'Server configuration error' });
+    return response.status(500).json({ error: 'Server configuration error: Missing DB keys' });
   }
 
   const supabase = createClient(supabaseUrl, supabaseKey);

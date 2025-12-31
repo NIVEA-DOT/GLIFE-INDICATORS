@@ -69,7 +69,7 @@ export const PricingSection: React.FC<PricingSectionProps> = ({ title = "Select 
                     </div>
                 )}
 
-                {/* Main Pricing Card - CHANGED TO VERTICAL STACK */}
+                {/* Main Pricing Card - VERTICAL STACK */}
                 <div className="relative">
                      <div className="absolute -inset-1 bg-gradient-to-b from-brand-500/20 to-transparent blur-xl opacity-50 rounded-2xl"></div>
                      <GlassPanel className="relative border-brand-500/30 text-center p-10">

@@ -6,7 +6,6 @@ import { Link } from 'react-router-dom';
 // --- VISUAL COMPONENTS ---
 
 const IconNav: React.FC = () => {
-    // Icons explicitly mapping to the 4 product components + sub-features
     const items = [
         { icon: Icons.Layers, label: "GL Box", desc: "Bundle" },
         { icon: Icons.Activity, label: "GL Vega", desc: "Bundle" },
@@ -77,25 +76,22 @@ const XRayChart: React.FC = () => {
 
                     {/* Fake Candles & Volume Profile */}
                     <div className="absolute inset-0 flex items-end justify-center px-10 pb-10 gap-1">
-                         {/* This would be a complex SVG usually, simplifying for CSS */}
                          {[...Array(40)].map((_, i) => {
                              const h = Math.random() * 200 + 50;
-                             const color = i % 2 === 0 ? 'bg-[#22c55e]' : 'bg-[#ef4444]'; // Green/Red
+                             const color = i % 2 === 0 ? 'bg-[#22c55e]' : 'bg-[#ef4444]';
                              return (
                                  <div key={i} className="flex-1 flex flex-col justify-end gap-1 opacity-80 hover:opacity-100 transition-opacity">
                                      <div style={{ height: `${h}px` }} className={`w-full rounded-sm ${color} relative group`}>
-                                         {/* Wick */}
                                          <div className="absolute -top-4 left-1/2 w-[1px] h-4 bg-zinc-600 -translate-x-1/2"></div>
                                          <div className="absolute -bottom-4 left-1/2 w-[1px] h-4 bg-zinc-600 -translate-x-1/2"></div>
                                      </div>
-                                     {/* Volume */}
                                      <div style={{ height: `${Math.random() * 50}px` }} className={`w-full ${color} opacity-30`}></div>
                                  </div>
                              )
                          })}
                     </div>
 
-                    {/* Orderflow Overlay (The "Deep" part) */}
+                    {/* Orderflow Overlay */}
                     <div className="absolute top-1/4 right-1/4 w-64 h-40 bg-black/60 border border-brand-500/30 backdrop-blur rounded p-4">
                         <div className="text-xs text-brand-400 font-mono mb-2 flex items-center gap-2">
                              <div className="w-2 h-2 rounded-full bg-brand-500 animate-pulse"></div> HIGH VOLUME NODE
@@ -134,7 +130,7 @@ export const Home: React.FC = () => {
                 <div className="absolute -inset-1 bg-gradient-to-b from-brand-600/30 to-transparent blur-2xl opacity-40 rounded-[2rem]"></div>
                 <XRayChart />
                 
-                {/* Left/Right Navigation Arrows (Visual only) */}
+                {/* Left/Right Navigation Arrows */}
                 <div className="absolute top-1/2 -left-4 md:-left-12 -translate-y-1/2 cursor-pointer text-zinc-600 hover:text-white transition-colors">
                     <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><polyline points="15 18 9 12 15 6"></polyline></svg>
                 </div>
