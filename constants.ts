@@ -9,14 +9,26 @@ export const PRODUCT_MONEY_FLOW = "Money Flow";
 export const PRODUCT_AUTO_NAME = "Footprint Auto";
 export const PRODUCT_MARKET_PROFILE = "Market Profile";
 
-// --- EXTERNAL LINKS (LemonSqueezy) ---
-// IMPORTANT: Replace these with your actual Product Checkout Links from Lemon Squeezy.
-// Currently set to '#' or homepage to prevent 404 errors.
+// --- PRICING CONSTANTS ---
+export const PRICE_BUNDLE_MONTHLY = 99;
+export const PRICE_BUNDLE_QUARTERLY = 269; // Approx 10% off
+export const PRICE_BUNDLE_YEARLY = 831;    // Approx 30% off
 
+// --- EXTERNAL LINKS (LemonSqueezy) ---
+// [ACTION REQUIRED]: Go to your Lemon Squeezy Dashboard -> Products.
+// Copy the "Checkout Link" (Share button) for each product and paste it below.
+
+// 1. Bundle Plans
 export const CHECKOUT_URL_BUNDLE_MONTHLY = "https://lemonsqueezy.com/"; 
+export const CHECKOUT_URL_BUNDLE_QUARTERLY = "https://lemonsqueezy.com/"; // NEW
+export const CHECKOUT_URL_BUNDLE_YEARLY = "https://lemonsqueezy.com/";    // NEW
 export const CHECKOUT_URL_BUNDLE_LIFETIME = "https://lemonsqueezy.com/"; 
+
+// 2. Single Indicators (Usually Lifetime)
 export const CHECKOUT_URL_MONEY_FLOW = "https://lemonsqueezy.com/"; 
 export const CHECKOUT_URL_PROFILE = "https://lemonsqueezy.com/";
+
+// 3. Auto System
 export const CHECKOUT_URL_AUTO_SETUP = "https://lemonsqueezy.com/";
 
 // --- AFFILIATE ---

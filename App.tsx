@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { HashRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import { Layout } from './components/Layout';
 import { Home } from './pages/Home';
-import { Pricing } from './pages/Pricing';
+import { Features } from './pages/Features'; // New catalog page
 import { Docs } from './pages/Docs';
 import { LicenseActivate } from './pages/License';
 import { GLBundle } from './pages/GLBundle';
@@ -12,6 +12,7 @@ import { MarketProfile } from './pages/MarketProfile';
 import { Support, Affiliate, Success, Terms, Privacy, Refund } from './pages/MiscPages';
 import { Auth } from './pages/Auth';
 import { Dashboard } from './pages/Dashboard';
+import { Debug } from './pages/Debug';
 
 const ScrollToTop = () => {
   const { pathname } = useLocation();
@@ -34,20 +35,27 @@ const App: React.FC = () => {
           <Route path="/signup" element={<Auth initialMode="signup" />} />
           <Route path="/dashboard" element={<Dashboard />} />
 
-          {/* Products */}
-          <Route path="/product/bundle" element={<GLBundle />} />
-          <Route path="/product/auto" element={<AutoTrading />} />
-          <Route path="/product/money-flow" element={<MoneyFlow />} />
-          <Route path="/product/market-profile" element={<MarketProfile />} />
+          {/* New Navigation Structure */}
+          <Route path="/features" element={<Features />} />
           
-          <Route path="/pricing" element={<Pricing />} />
+          {/* Indicators (Product Details) */}
+          <Route path="/indicators/bundle" element={<GLBundle />} />
+          <Route path="/indicators/money-flow" element={<MoneyFlow />} />
+          <Route path="/indicators/profile" element={<MarketProfile />} />
+          <Route path="/indicators/auto" element={<AutoTrading />} />
+          
+          {/* Docs & Tools */}
           <Route path="/docs" element={<Docs />} />
-          <Route path="/license-tool" element={<LicenseActivate />} /> {/* Renamed for clarity */}
-          <Route path="/license" element={<LicenseActivate />} /> {/* Legacy redirect support if needed */}
+          <Route path="/license-tool" element={<LicenseActivate />} /> 
+          <Route path="/license" element={<LicenseActivate />} /> 
           
+          {/* Misc */}
           <Route path="/support" element={<Support />} />
           <Route path="/affiliates" element={<Affiliate />} />
           <Route path="/success" element={<Success />} />
+          
+          {/* Debug Route */}
+          <Route path="/debug" element={<Debug />} />
           
           {/* Legal */}
           <Route path="/terms" element={<Terms />} />
