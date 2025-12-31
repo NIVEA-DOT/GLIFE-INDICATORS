@@ -20,8 +20,8 @@
     "noUnusedParameters": false,
     "noFallthroughCasesInSwitch": true,
     
-    /* Types - Crucial for Vite env variables */
-    "types": ["vite/client"]
+    /* Types - Add 'node' to recognize process/Buffer */
+    "types": ["vite/client", "node"]
   },
   "include": ["src/**/*.ts", "src/**/*.tsx", "*.ts", "*.tsx"],
   "exclude": ["node_modules", "api"]
