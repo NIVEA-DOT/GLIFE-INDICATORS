@@ -80,7 +80,7 @@ export const Debug: React.FC = () => {
                             </div>
                         </div>
                         <div className="mt-4 text-xs text-zinc-500">
-                            * If these are missing, go to Vercel Settings -> Environment Variables.
+                            * If these are missing, go to Vercel Settings -&gt; Environment Variables.
                         </div>
                     </GlassPanel>
 
